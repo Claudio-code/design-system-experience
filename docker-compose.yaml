@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    backend-monolith:
+        container_name: backend-monolith
+        build: ./backend-monolith
+        volumes:
+            -   ./backend-monolith:/var/www
+        networks:
+            -   go-stack-network
+
+    backend-monolith-nginx:
+        container_name: backend-monolith-nginx
+        build: backend-monolith/nginx
+        ports:
+            -   "8000:80"
+        volumes:
+            -   ./backend-monolith:/var/www
+        networks:
+            -   go-stack-network
+        depends_on:
+            -   backend-monolith
+
+    backend-monolith-postgres:
+        container_name: backend-monolith-postgres
+        image: postgres:14-alpine
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: ChangeMe
+            POSTGRES_DB: goStack
+            PGDATA: /data/postgres
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./devOps/data-postgres:/data/postgres
+        networks:
+            - go-stack-network
+
+networks:
+    go-stack-network:
+        driver: bridge
