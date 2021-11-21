@@ -4,22 +4,12 @@ services:
     backend-monolith:
         container_name: backend-monolith
         build: ./backend-monolith
-        volumes:
-            -   ./backend-monolith:/var/www
-        networks:
-            -   go-stack-network
-
-    backend-monolith-nginx:
-        container_name: backend-monolith-nginx
-        build: backend-monolith/nginx
         ports:
-            -   "8000:80"
+            - "8000:80"
         volumes:
-            -   ./backend-monolith:/var/www
+            -   ./backend-monolith:/app
         networks:
             -   go-stack-network
-        depends_on:
-            -   backend-monolith
 
     backend-monolith-postgres:
         container_name: backend-monolith-postgres
