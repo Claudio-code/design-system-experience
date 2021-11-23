@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker exec -it backend-monolith php artisan $@
+docker exec -it backend-monolith chmod 777 -R ./database/migrations

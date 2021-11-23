@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Uuid;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -11,22 +12,23 @@ use Laravel\Lumen\Auth\Authorizable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable, HasFactory;
+    use Authenticatable;
+    use Authorizable;
+    use HasFactory;
+    use Uuid;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    /** @var bool */
+    public $incrementing = false;
+
+    /** @var string[] */
     protected $fillable = [
-        'name', 'email',
+        'name',
+        'email',
+        'avatar',
+        'password',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+    /** @var string[] */
     protected $hidden = [
         'password',
     ];
