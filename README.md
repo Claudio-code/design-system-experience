@@ -10,5 +10,5 @@
 ---
 
 <div align="center">
-    <img src="system-design/diagrama-cloud-system.jpg" width="100%" height="100%" style="border-radius:6px;" />
+    <img src="system-design/diagram-cloud-system.jpg" width="100%" height="100%" style="border-radius:6px;" />
 </div>
